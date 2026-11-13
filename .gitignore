@@ -1,0 +1,8 @@
+__pycache__/
+*.egg-info
+*.out
+/data/
+/models/
+/checkpoints/
+plots/*.pdf
+tables/*.tex

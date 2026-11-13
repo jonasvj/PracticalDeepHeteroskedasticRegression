@@ -1,0 +1,22 @@
+name: resnet
+_target_: src.models.ResNet
+backbone:
+  _target_: src.models.resnet.ResNetBackbone
+head:
+  _target_: src.models.resnet.ResNetHead
+  _partial_: true
+feature_extractor:
+  _target_: src.utils.FeatureExtractor
+  module_names_to_extract:
+    - backbone.model.layer1
+    - backbone.model.layer2
+    - backbone.model.layer3
+    - backbone.model.layer4
+    - head.linear
+  module_indices_to_extract:
+    - -1
+  capture_module_input:
+    - true
+  detach_features: false
+variance_head:
+  _target_: src.models.resnet.ResNetLinearVariancePrediction

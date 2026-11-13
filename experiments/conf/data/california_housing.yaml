@@ -1,0 +1,13 @@
+_target_: src.data.CaliforniaHousingDataModule
+name: california_housing
+target: california_housing
+data_dir: data/california_housing
+batch_size_train: 256
+batch_size_inference: 1024
+num_workers: 0
+splits: [13209, 3303, 4128]
+seed: 0
+subset_size: null
+cal_subset_size: null
+cal_subset_seed: 0
+normalization: quantile

@@ -1,0 +1,34 @@
+name: ft_transformer
+_target_: src.models.FTTransformer
+backbone:
+  _target_: src.models.ft_transformer.FTTransformerBackbone
+  d_numerical: 8
+  n_layers: 3
+  d_token: 192
+  n_heads: 8
+  d_ffn_factor: 1.333333333333333
+  attention_dropout: 0.2
+  ffn_dropout: 0.1
+  residual_dropout: 0.0
+  activation: reglu
+  prenormalization: true
+  initialization: kaiming
+  token_bias: true
+head:
+  _target_: src.models.ft_transformer.FTTransformerHead
+  _partial_: true
+  d_token: ${model.backbone.d_token}
+feature_extractor:
+  _target_: src.utils.FeatureExtractor
+  module_names_to_extract:
+    - backbone.blocks.0
+    - backbone.blocks.1
+    - backbone.blocks.2
+    - head.linear
+  module_indices_to_extract:
+    - -1
+  capture_module_input:
+    - true
+  detach_features: false
+variance_head:
+  _target_: src.models.ft_transformer.FTTransformerLinearVariancePrediction

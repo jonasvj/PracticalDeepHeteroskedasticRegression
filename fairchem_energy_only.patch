@@ -1,0 +1,38 @@
+diff --git a/src/fairchem/core/units/mlip_unit/api/inference.py b/src/fairchem/core/units/mlip_unit/api/inference.py
+index 1636c44..9561ce9 100644
+--- a/src/fairchem/core/units/mlip_unit/api/inference.py
++++ b/src/fairchem/core/units/mlip_unit/api/inference.py
+@@ -89,6 +89,9 @@ class InferenceSettings:
+ 
+     edge_chunk_size: int | None = None
+ 
++    # Only compute energy , skip stress+forces
++    energy_only: bool = False
++
+ 
+ # this is most general setting that works for most systems and models,
+ # not optimized for speed
+diff --git a/src/fairchem/core/units/mlip_unit/predict.py b/src/fairchem/core/units/mlip_unit/predict.py
+index a41b07f..9f46ab3 100644
+--- a/src/fairchem/core/units/mlip_unit/predict.py
++++ b/src/fairchem/core/units/mlip_unit/predict.py
+@@ -146,6 +146,10 @@ class MLIPPredictUnit(PredictUnit[AtomicData], MLIPPredictUnitProtocol):
+                 inference_settings.internal_graph_gen_version
+             )
+ 
++        if inference_settings.energy_only:
++            overrides["backbone"]["regress_stress"] = False
++            overrides["backbone"]["regress_forces"] = False
++
+         if inference_settings.wigner_cuda:
+             logging.warning(
+                 "The wigner_cuda flag is deprecated and will be removed in future versions."
+@@ -159,6 +163,8 @@ class MLIPPredictUnit(PredictUnit[AtomicData], MLIPPredictUnitProtocol):
+             for task_config in checkpoint.tasks_config
+         ]
+         self.tasks = {t.name: t for t in tasks}
++        if inference_settings.energy_only:
++            self.tasks = {t.name: t for t in tasks if t.property == "energy"}
+ 
+         self._dataset_to_tasks = get_dataset_to_tasks_map(self.tasks.values())
+         assert set(self._dataset_to_tasks.keys()).issubset(

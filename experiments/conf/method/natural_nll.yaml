@@ -1,0 +1,15 @@
+defaults:
+  - defaults
+  - _self_
+
+name: natural_nll
+
+init:
+  _target_: src.methods.NaturalNLLHeteroscedasticRegression
+  normalize_loss: false
+
+fit:
+  _target_: src.methods.NaturalNLLHeteroscedasticRegression.fit
+
+calibrate:
+  _target_: src.methods.NaturalNLLHeteroscedasticRegression.calibrate

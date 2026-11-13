@@ -1,0 +1,15 @@
+defaults:
+  - defaults
+  - _self_
+
+name: beta_nll
+
+init:
+  _target_: src.methods.BetaNLLHeteroscedasticRegression
+  beta: 0
+
+fit:
+  _target_: src.methods.BetaNLLHeteroscedasticRegression.fit
+
+calibrate:
+  _target_: src.methods.BetaNLLHeteroscedasticRegression.calibrate

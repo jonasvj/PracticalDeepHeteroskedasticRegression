@@ -1,0 +1,13 @@
+_target_: src.data.YearDataModule
+name: year
+target: year
+data_dir: data/year
+batch_size_train: 1024
+batch_size_inference: 1024
+num_workers: 0
+splits: [370972, 92743]
+seed: 0
+subset_size: null
+cal_subset_size: null
+cal_subset_seed: 0
+normalization: quantile

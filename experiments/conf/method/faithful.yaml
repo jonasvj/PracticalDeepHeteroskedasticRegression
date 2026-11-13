@@ -1,0 +1,14 @@
+defaults:
+  - defaults
+  - _self_
+
+name: faithful
+
+init:
+  _target_: src.methods.FaithfulHeteroscedasticRegression
+
+fit:
+  _target_: src.methods.FaithfulHeteroscedasticRegression.fit
+
+calibrate:
+  _target_: src.methods.FaithfulHeteroscedasticRegression.calibrate

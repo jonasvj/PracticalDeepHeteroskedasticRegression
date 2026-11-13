@@ -1,0 +1,10 @@
+_target_: src.data.FeatureDataModule
+name: allscaip
+target: 0
+data_dir: data/omol25/val
+batch_size_train: 100
+batch_size_inference: 512
+num_workers: 0
+splits: [10000, 10000]
+data_split: 0
+cal_subset_size: null

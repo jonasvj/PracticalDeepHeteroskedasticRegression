@@ -1,0 +1,12 @@
+_target_: src.data.QM9DataModule
+name: qm9
+target: 7
+data_dir: data/
+batch_size_train: 100
+batch_size_inference: 2048
+num_workers: 0
+splits: [110000, 10000, 10831]
+seed: 0
+subset_size: null
+cal_subset_size: null
+cal_subset_seed: 0

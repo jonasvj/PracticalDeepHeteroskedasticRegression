@@ -1,0 +1,21 @@
+defaults:
+  - data: qm9
+  - model: painn
+  - method: homo_nll
+  - _self_
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+do_training: true
+do_calibration: true
+
+seed: 0
+model_dir: models/${data.name}/${method.name}/
+model_name: ${model.name}_seed-${seed}.pt
+pretrained_model: null
+use_var_scale_during_normal_test: false
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

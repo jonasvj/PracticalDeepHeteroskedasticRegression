@@ -1,0 +1,22 @@
+name: post_hoc
+
+init:
+  _target_: src.methods.PostHocRegression
+
+calibrate:
+  _target_: src.methods.PostHocRegression.calibrate
+  num_epochs: 500
+  patience: null
+  min_epochs: null
+  precompute_features: true
+  fit_var_scale_factor: false
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 5e-4
+    weight_decay: 0.01
+  scheduler:
+    _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+    _partial_: true
+    eta_min: 0
+    T_max: ${method.calibrate.num_epochs}

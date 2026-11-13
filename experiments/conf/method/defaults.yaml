@@ -1,0 +1,29 @@
+fit:
+  num_epochs: 1000
+  patience: ${method.fit.num_epochs}
+  min_epochs: ${method.fit.num_epochs}
+  es_criterion: mae
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 5e-4
+    weight_decay: 0.01
+  scheduler:
+    _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+    _partial_: true
+    eta_min: 0
+    T_max: ${method.fit.num_epochs}
+
+calibrate:
+  num_epochs: 1000
+  optimizer:
+    _target_: torch.optim.LBFGS
+    _partial_: true
+    lr: 0.01
+    max_iter: 100
+    history_size: 1000
+    line_search_fn: strong_wolfe
+  scheduler:
+    _target_: torch.optim.lr_scheduler.ConstantLR
+    _partial_: true
+    factor: 1

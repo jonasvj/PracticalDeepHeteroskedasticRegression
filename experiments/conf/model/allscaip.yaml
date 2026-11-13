@@ -1,0 +1,5 @@
+name: allscaip
+_target_: src.models.FeatureModel
+variance_head:
+  _target_: src.models.FeatureModelLinearVariancePrediction
+  feature_keys: [module.backbone.transformer_blocks.0.node_ffn.ffn_norm]

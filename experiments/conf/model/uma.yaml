@@ -1,0 +1,6 @@
+name: uma
+_target_: src.models.FeatureModel
+variance_head:
+  _target_: src.models.FeatureModelLinearVariancePrediction
+  feature_keys: [module.backbone.blocks.0]
+

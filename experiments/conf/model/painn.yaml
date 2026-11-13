@@ -1,0 +1,32 @@
+name: painn
+_target_: src.models.PaiNN
+backbone:
+  _target_: src.models.painn.PaiNNBackbone
+  num_message_passing_layers: 3
+  num_features: 128
+  num_rbf_features: 20
+  num_unique_atoms: 100
+  cutoff_dist: 5.0
+  dropout_rate: 0.
+head:
+  _target_: src.models.painn.PaiNNAtomwisePrediction
+  _partial_: true
+  num_features: ${model.backbone.num_features}
+  num_outputs: 1
+  num_layers: 2
+  dropout_rate: 0.
+feature_extractor:
+  _target_: src.utils.FeatureExtractor
+  module_names_to_extract:
+    - backbone.update_blocks.0
+    - backbone.update_blocks.1
+    - backbone.update_blocks.2
+    - head.readout_network.0
+    - head.readout_network.3
+  module_indices_to_extract:
+    - -1
+  capture_module_input:
+    - true
+  detach_features: false
+variance_head:
+  _target_: src.models.painn.PaiNNLinearVariancePrediction

@@ -1,0 +1,14 @@
+defaults:
+  - defaults
+  - _self_
+
+name: homo_nll
+
+init:
+  _target_: src.methods.HomoscedasticRegression
+
+fit:
+  _target_: src.methods.HomoscedasticRegression.fit
+
+calibrate:
+  _target_: src.methods.HomoscedasticRegression.calibrate

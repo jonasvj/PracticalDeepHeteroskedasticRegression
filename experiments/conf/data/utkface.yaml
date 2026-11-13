@@ -1,0 +1,12 @@
+_target_: src.data.UTKFaceDataModule
+name: utkface
+target: age
+data_dir: data/utkface
+batch_size_train: 32
+batch_size_inference: 1024
+num_workers: 0
+splits: [0.8, 0.1, 0.1]
+seed: 0
+subset_size: null
+cal_subset_size: null
+cal_subset_seed: 0

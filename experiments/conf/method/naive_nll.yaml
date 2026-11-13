@@ -1,0 +1,14 @@
+defaults:
+  - defaults
+  - _self_
+
+name: naive_nll
+
+init:
+  _target_: src.methods.NaiveNLLHeteroscedasticRegression
+
+fit:
+  _target_: src.methods.NaiveNLLHeteroscedasticRegression.fit
+
+calibrate:
+  _target_: src.methods.NaiveNLLHeteroscedasticRegression.calibrate
